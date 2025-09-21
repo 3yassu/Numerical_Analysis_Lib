@@ -11,7 +11,4 @@ double *solve(**double A, int neq, int pivot_index, *double b);
 
 double **newton_interpolation(*double x, *double y, int length);
 
-double ln_approx(double x);
-double power(double x);
-
 #endif
