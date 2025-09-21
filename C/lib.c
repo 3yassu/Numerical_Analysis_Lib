@@ -44,3 +44,17 @@ double lagrange_solve(double *x, double *y, int length){
 
 }
 
+double ln_approx(double x){
+	double ln = 1;
+	int i = 0, neg = 1, power = 1, new = 1;
+	do{
+		ln = new;
+		for(int j = 0; j < i; j++)
+			power *= (x+1);
+		neg = i % 2 ? -1 : 1;
+		new += new*power/i;
+		power = 1; i++;
+	}while(ln != new)
+	return ln;
+}
+
