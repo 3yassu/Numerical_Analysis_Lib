@@ -54,7 +54,7 @@ double ln_approx(double x){
 		neg = i % 2 ? -1 : 1;
 		new += new*power/i;
 		power = 1; i++;
-	}while(ln != new)
+	}while(ln != new);
 	return ln;
 }
 
