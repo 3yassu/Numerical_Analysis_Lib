@@ -1,6 +1,21 @@
 #include <math.h>
 #include <stdlib.h>
+#include <stddef.h>
+#include <string.h>
 #include "lib.h"
+/*
+void mem_swap(void *a, void *b, size_t size){
+	void *temp = malloc(size);
+	if(temp == NULL){
+		printf("No memory available");
+	else{
+		memcpy(temp, a, size);
+		memcpy(a, b, size);
+		memcpy(b, temp, size);
+	}
+} <- If I wanna i guess...
+*/
+void mem_swap(double *a, double *b);
 
 Factor *factor(double **A, int neq, int *cond, int pivot_index){
 	int flag = 0;
@@ -11,14 +26,24 @@ Factor *factor(double **A, int neq, int *cond, int pivot_index){
 
 double *solve(double **A, int neq, int pivot_index, *double b){
 	double *sol = (double*)malloc(sizeof(double)*i);
-	for(int i = 0; i < length; i++)
+	for(int i = 0; i < neq; i++)
 		sol[i] = b[i];
-	if(length == 1)
+	if(neq == 1)
 		*sol /= **A;
 	else{
-
+		//Forward Elimination
+		for(int i = 0; i < neq - 1; i++){
+			int 
+			mem_swap()
+		}
 	}
 	return sol;
+}
+
+void mem_swap(double *a, double *b){
+	double temp = *a;
+	*a = *b;
+	*b = temp;
 }
 
 double **newton_interpolation(double *x, double *y, int length){
@@ -33,14 +58,21 @@ double **newton_interpolation(double *x, double *y, int length){
 	return coef; //Don't forget to free when calling this function
 }
 
-double newton_solve(double *coefs, double *x_vals, double x, int length){
+double newton_solve(double x, double *coefs, double *x_vals, int length){
 	double val = coefs[length-1];
 	for(int i = 2; i < length+1; i++)
 		val = coefs[length-i] + (x-x_vals[length-i])*val;
 	return val;
 }
 
-double lagrange_solve(double *x, double *y, int length){
-
-}
+//double lagrange_solve(double *x, double *y, int length){
+// e
+//}
+// .git
+// src
+// 	|-lib.c
+// 	|-lin.c
+// 	|-interpolate.c
+// 	|-zero.c
+// include
 
