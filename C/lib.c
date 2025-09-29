@@ -24,7 +24,7 @@ Factor *factor(double **A, int neq, int *cond, int pivot_index){
 
 }
 
-double *solve(double **A, int neq, int pivot_index, *double b){
+double *solve(double **A, int neq, int *pivots, *double b){
 	double *sol = (double*)malloc(sizeof(double)*i);
 	for(int i = 0; i < neq; i++)
 		sol[i] = b[i];
@@ -33,8 +33,18 @@ double *solve(double **A, int neq, int pivot_index, *double b){
 	else{
 		//Forward Elimination
 		for(int i = 0; i < neq - 1; i++){
-			int 
-			mem_swap()
+			int m = pivots[i];
+			mem_swap(x+m, x+k);
+			for(int j = i+1; j < neq;j++)
+				x[j] += A[j][k]*x[k];
+		}
+		//Back Substitution
+		x[neq-1] /= A[neq-1][neq-1];
+		for(int i = neq-2; i > -1; i--){
+			float sum = 0;
+			for(int j = i+1; j < neq; j++)
+				sum += A[i, j]*x[j];
+			x[i] = (x[i]-sum)/A[i,i];
 		}
 	}
 	return sol;
