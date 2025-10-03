@@ -3,12 +3,19 @@
 
 typedef struct Factor{
 	int flag;
-	int pivot_index;
+	int *pivot;
 }Factor;
 
+//typedef enum Norm{
+//	INF,
+//	NUM
+//}Norm;
+
+
+double norm(**double A, int size_w, int size_h); //Later add support for all p-norm
 Factor *factor(**double A, int neq, *int cond, int pivot_index);
 double *solve(**double A, int neq, int pivot_index, *double b);
 
 double **newton_interpolation(double *x, double *y, int length);
-doublew newton_solve(double x, double *coefs, double *x_vals, int length);
+double newton_solve(double x, double *coefs, double *x_vals, int length);
 #endif

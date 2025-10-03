@@ -17,11 +17,15 @@ void mem_swap(void *a, void *b, size_t size){
 */
 void mem_swap(double *a, double *b);
 
-Factor *factor(double **A, int neq, int *cond, int pivot_index){
+Factor *factor(double **A, int neq, int *cond, int *pivots){
 	int flag = 0;
-	int *pivots = (int*)malloc(sizeof(int)*neq);
+	int *pivots = (int*)calloc(sizeof(int)*neq);
 	pivots[neq - 1] = 1;
+	Anorm = norm(A, neq, neq);
 
+}
+double norm(**double A, int size_w, int size_h){ //Later add support for all p-norm
+	return 0; //lol
 }
 
 double *solve(double **A, int neq, int *pivots, *double b){
@@ -34,17 +38,17 @@ double *solve(double **A, int neq, int *pivots, *double b){
 		//Forward Elimination
 		for(int i = 0; i < neq - 1; i++){
 			int m = pivots[i];
-			mem_swap(x+m, x+k);
+			mem_swap(sol+m, sol+i);
 			for(int j = i+1; j < neq;j++)
-				x[j] += A[j][k]*x[k];
+				sol[j] += A[j][i]*sol[i];
 		}
 		//Back Substitution
-		x[neq-1] /= A[neq-1][neq-1];
+		sol[neq-1] /= A[neq-1][neq-1];
 		for(int i = neq-2; i > -1; i--){
 			float sum = 0;
 			for(int j = i+1; j < neq; j++)
-				sum += A[i, j]*x[j];
-			x[i] = (x[i]-sum)/A[i,i];
+				sum += A[i, j]*sol[j];
+			sol[i] = (sol[i]-sum)/A[i,i];
 		}
 	}
 	return sol;
@@ -86,3 +90,9 @@ double newton_solve(double x, double *coefs, double *x_vals, int length){
 // 	|-zero.c
 // include
 
+// 1 2 3 
+// 4 5 6
+// 7 8 9
+//
+// 1+4+7, 2+5+8, 3+6+9
+//  
