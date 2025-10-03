@@ -17,15 +17,35 @@ void mem_swap(void *a, void *b, size_t size){
 */
 void mem_swap(double *a, double *b);
 
-Factor *factor(double **A, int neq, int *cond, int *pivots){
+int *factor(double **A, int neq, int *cond, int *pivots){
 	int flag = 0;
-	int *pivots = (int*)calloc(sizeof(int)*neq);
 	pivots[neq - 1] = 1;
-	Anorm = norm(A, neq, neq);
+	double Anorm = norm(A, neq, neq);
+	if(neq == 1){
+		if(A[0][0]) == 0
+			flag = 1;
+		else{
+			*cond = 1;
+		}
+		return flag;
+	}
+	for(int i = 0; i < neq - 1; i++){
+		
+	}
 
 }
-double norm(**double A, int size_w, int size_h){ //Later add support for all p-norm
-	return 0; //lol
+double norm(**double A, int size_w, int size_h){ //Later add support for all p-norm but for now inf norm
+	double max = 0, test = 0;
+	for(int i = 0; i < size_h)
+		max += A[i][0];
+	for(int i = 1; i < size_w; i++){
+		for(int j = 0; j < size_h; j++)
+			test += A[i][j];
+		if(test > max)
+			max = test;
+		test = 0;
+	}
+	return max
 }
 
 double *solve(double **A, int neq, int *pivots, *double b){
